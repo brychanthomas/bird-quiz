@@ -37,4 +37,8 @@ export class UiManager {
     }
     return birds;
   }
+
+  public setBirdListsVisible(visible: boolean) {
+    document.getElementById('birdListsDiv').style.display = (visible ? 'block' : 'none');
+  }
 }
