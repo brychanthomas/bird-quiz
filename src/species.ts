@@ -34,4 +34,8 @@ export class Species {
     (<HTMLVideoElement>document.getElementById("audio")).play();
     console.log(observation.uri);
   }
+
+  public getName() {
+    return this.name;
+  }
 }
