@@ -1,32 +1,56 @@
 import { birdLists } from './birdLists.js';
 
 export class UiManager {
-  constructor() {
+
+  private birdListsDiv: HTMLElement;
+  private quizDiv: HTMLElement;
+
+  constructor(startButtonCallback:()=>void, keyPressCallback:(key)=>void) {
     this.createBirdLists();
+    this.createStartButton(startButtonCallback);
+    this.createQuizPage(keyPressCallback);
+    this.setQuizPageVisible(false);
   }
 
   private createBirdLists() {
-    var birdListsDiv = document.createElement('div');
-    birdListsDiv.id = 'birdListsDiv';
-    document.body.appendChild(birdListsDiv);
+    this.birdListsDiv = document.createElement('div');
+    this.birdListsDiv.id = 'birdListsDiv';
+    document.body.appendChild(this.birdListsDiv);
 
     for (var list of birdLists) {
       var title = document.createElement('h2')
       title.textContent = list.name;
-      birdListsDiv.appendChild(title);
+      this.birdListsDiv.appendChild(title);
 
       for (var bird of list.birds) {
         var checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
         checkbox.value = bird;
         checkbox.name = bird;
-        birdListsDiv.appendChild(checkbox);
+        this.birdListsDiv.appendChild(checkbox);
         var label = document.createElement('label');
         label.textContent = bird;
-        birdListsDiv.appendChild(label);
-        birdListsDiv.appendChild(document.createElement('br'));
+        this.birdListsDiv.appendChild(label);
+        this.birdListsDiv.appendChild(document.createElement('br'));
       }
     }
+  }
+
+  private createStartButton(callback:()=>void) {
+    var button = document.createElement('button');
+    button.onclick = callback;
+    button.textContent = "Start";
+    this.birdListsDiv.appendChild(button);
+  }
+
+  private createQuizPage(callback:(key:Event)=>void) {
+    this.quizDiv = document.createElement('div');
+    this.quizDiv.id = 'quizDiv';
+    document.body.appendChild(this.quizDiv);
+    var input = document.createElement('input');
+    input.type = 'text';
+    input.onkeypress = callback;
+    this.quizDiv.appendChild(input);
   }
 
   public getSelectedBirds(): string[] {
@@ -39,6 +63,10 @@ export class UiManager {
   }
 
   public setBirdListsVisible(visible: boolean) {
-    document.getElementById('birdListsDiv').style.display = (visible ? 'block' : 'none');
+    this.birdListsDiv.style.display = (visible ? 'block' : 'none');
+  }
+
+  public setQuizPageVisible(visible: boolean) {
+    this.quizDiv.style.display = (visible ? 'block' : 'none');
   }
 }
