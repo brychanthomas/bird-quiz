@@ -53,7 +53,7 @@ export class UiManager {
     input.id = "birdNameInput";
     input.onkeypress = callback;
     input.style.width = '100%';
-    input.style.margin = '0 auto';
+    input.style.textAlign = 'center';
     this.quizDiv.appendChild(input);
     var answerText = document.createElement('span');
     answerText.style.display = 'none';
@@ -65,7 +65,7 @@ export class UiManager {
     var back = document.createElement('button');
     back.onclick = callback;
     back.textContent = 'Back';
-    this.quizDiv.appendChild(back);
+    this.quizDiv.insertBefore(back, this.quizDiv.firstChild);
   }
 
   public getSelectedBirds(): string[] {
