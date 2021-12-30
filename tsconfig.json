@@ -3,5 +3,8 @@
     "module": "es6",
     "target": "es6",
     "outDir": "js"
-  }
+  },
+  "include": [
+    "src"
+  ]
 }

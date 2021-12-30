@@ -27,6 +27,7 @@ export class Species {
     let soundUrl = observation.sounds[0].file_url;
     let attribution = observation.sounds[0].attribution;
     document.getElementById("audio").setAttribute('src', soundUrl);
-    (<HTMLVideoElement>document.getElementById("myAudio")).play();
+    (<HTMLVideoElement>document.getElementById("audio")).play();
+    console.log(observation.uri);
   }
 }
