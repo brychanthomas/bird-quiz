@@ -35,6 +35,10 @@ export class Species {
     console.log(observation.uri);
   }
 
+  public stopSound() {
+    (<HTMLVideoElement>document.getElementById("audio")).pause();
+  }
+
   public getName() {
     return this.name;
   }

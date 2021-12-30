@@ -5,10 +5,11 @@ export class UiManager {
   private birdListsDiv: HTMLElement;
   private quizDiv: HTMLElement;
 
-  constructor(startButtonCallback:()=>void, keyPressCallback:(key)=>void) {
+  constructor(startButtonCallback:()=>void, keyPressCallback:(key)=>void, backCallback:()=>void) {
     this.createBirdLists();
     this.createStartButton(startButtonCallback);
     this.createQuizPage(keyPressCallback);
+    this.createBackButton(backCallback);
     this.setQuizPageVisible(false);
   }
 
@@ -52,6 +53,13 @@ export class UiManager {
     input.id = "birdNameInput";
     input.onkeypress = callback;
     this.quizDiv.appendChild(input);
+  }
+
+  private createBackButton(callback: ()=>void) {
+    var back = document.createElement('button');
+    back.onclick = callback;
+    back.textContent = 'Back';
+    this.quizDiv.appendChild(back);
   }
 
   public getSelectedBirds(): string[] {
