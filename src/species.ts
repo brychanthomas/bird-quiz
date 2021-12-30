@@ -23,6 +23,10 @@ export class Species {
   }
 
   public playSound() {
+    if (this.observations == undefined) { //if observations not loaded yet
+      setTimeout(this.playSound.bind(this), 100); //try again in 100 seconds
+      return;
+    }
     let observation = this.observations.splice(Math.floor(Math.random()*this.observations.length), 1)[0];
     let soundUrl = observation.sounds[0].file_url;
     let attribution = observation.sounds[0].attribution;
