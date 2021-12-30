@@ -23,12 +23,15 @@ export class BirdQuiz {
 
   onKeyPress(event) {
     if (event.keyCode === 13) {
-      if (this.ui.getTextInput().toLowerCase() === this.currentSpecies.getName().toLowerCase()) {
-        console.log("correct");
+      if (this.ui.getAndClearTextInput().toLowerCase() === this.currentSpecies.getName().toLowerCase()) {
+        this.ui.showAnswer(this.currentSpecies.getName(), 'green');
       } else {
-        console.log("incorrect");
+        this.ui.showAnswer(this.currentSpecies.getName(), 'red');
       }
-      setTimeout(this.askQuestion.bind(this), 2000);
+      setTimeout(function() {
+        this.ui.hideAnswer();
+        this.askQuestion();
+      }.bind(this), 2000);
     }
   }
 

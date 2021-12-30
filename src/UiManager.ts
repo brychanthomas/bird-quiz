@@ -52,7 +52,13 @@ export class UiManager {
     input.type = 'text';
     input.id = "birdNameInput";
     input.onkeypress = callback;
+    input.style.width = '100%';
+    input.style.margin = '0 auto';
     this.quizDiv.appendChild(input);
+    var answerText = document.createElement('span');
+    answerText.style.display = 'none';
+    answerText.id = "answerText";
+    this.quizDiv.appendChild(answerText);
   }
 
   private createBackButton(callback: ()=>void) {
@@ -79,8 +85,21 @@ export class UiManager {
     this.quizDiv.style.display = (visible ? 'block' : 'none');
   }
 
-  public getTextInput() {
+  public getAndClearTextInput() {
     var input = <HTMLInputElement>document.getElementById('birdNameInput');
-    return input.value;
+    var text = input.value;
+    input.value = '';
+    return text;
+  }
+
+  public showAnswer(text, colour) {
+    var answerText = document.getElementById("answerText");
+    answerText.textContent = text;
+    answerText.style.color = colour;
+    answerText.style.display = 'block';
+  }
+
+  public hideAnswer() {
+    document.getElementById("answerText").style.display = 'none';
   }
 }
