@@ -49,6 +49,7 @@ export class UiManager {
     document.body.appendChild(this.quizDiv);
     var input = document.createElement('input');
     input.type = 'text';
+    input.id = "birdNameInput";
     input.onkeypress = callback;
     this.quizDiv.appendChild(input);
   }
@@ -68,5 +69,10 @@ export class UiManager {
 
   public setQuizPageVisible(visible: boolean) {
     this.quizDiv.style.display = (visible ? 'block' : 'none');
+  }
+
+  public getTextInput() {
+    var input = <HTMLInputElement>document.getElementById('birdNameInput');
+    return input.value;
   }
 }
