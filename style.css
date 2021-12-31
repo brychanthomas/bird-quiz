@@ -1,3 +1,9 @@
+body {
+  font-family: Calibri, Arial, sans-serif;
+  background-color: #99ddff;
+  font-size: 1.5em;
+}
+
 #birdNameInput {
   width: 100%;
   text-align: center;
@@ -11,7 +17,18 @@
 #answerText {
   position: absolute;
   top: 70%;
+  left:0%;
   width: 100%;
   font-size: 1.5em;
   text-align: center;
+}
+
+#colourFlasher {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  z-index: -1;
+  opacity: 0;
 }

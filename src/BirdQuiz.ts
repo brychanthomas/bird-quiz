@@ -27,9 +27,9 @@ export class BirdQuiz {
   onKeyPress(event) {
     if (event.keyCode === 13) {
       if (this.ui.getAndClearTextInput().toLowerCase() === this.currentSpecies.getName().toLowerCase()) {
-        this.ui.showAnswer(this.currentSpecies.getName(), 'green');
+        this.ui.showAnswer(this.currentSpecies.getName(), 'palegreen');
       } else {
-        this.ui.showAnswer(this.currentSpecies.getName(), 'red');
+        this.ui.showAnswer(this.currentSpecies.getName(), 'pink');
       }
       setTimeout(function() {
         this.ui.hideAnswer();

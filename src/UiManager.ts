@@ -94,11 +94,28 @@ export class UiManager {
   public showAnswer(text, colour) {
     var answerText = document.getElementById("answerText");
     answerText.textContent = text;
-    answerText.style.color = colour;
     answerText.style.display = 'block';
+    var colourFlasher = document.getElementById("colourFlasher");
+    colourFlasher.style.backgroundColor = colour;
+    colourFlasher.style.display = 'block';
+    var timer = setInterval(function() {
+      colourFlasher.style.opacity = String(Number(colourFlasher.style.opacity)+0.1);
+      console.log(colourFlasher);
+      if (Number(colourFlasher.style.opacity) === 1) {
+        clearInterval(timer);
+      }
+    }, 15);
   }
 
   public hideAnswer() {
     document.getElementById("answerText").style.display = 'none';
+    var colourFlasher = document.getElementById("colourFlasher");
+    var timer = setInterval(function() {
+      colourFlasher.style.opacity = String(Number(colourFlasher.style.opacity)-0.1);
+      console.log(colourFlasher);
+      if (Number(colourFlasher.style.opacity) === 0) {
+        clearInterval(timer);
+      }
+    }, 15);
   }
 }
