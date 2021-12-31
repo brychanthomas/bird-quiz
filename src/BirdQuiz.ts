@@ -13,12 +13,15 @@ export class BirdQuiz {
   }
 
   startQuiz() {
-    this.ui.setBirdListsVisible(false);
-    for (var bird of this.ui.getSelectedBirds()) {
-      this.speciesList.push(new Species(bird));
+    var birdsSelected = this.ui.getSelectedBirds();
+      if (birdsSelected.length > 0) {
+      this.ui.setBirdListsVisible(false);
+      for (var bird of this.ui.getSelectedBirds()) {
+        this.speciesList.push(new Species(bird));
+      }
+      this.ui.setQuizPageVisible(true);
+      this.askQuestion();
     }
-    this.ui.setQuizPageVisible(true);
-    this.askQuestion();
   }
 
   onKeyPress(event) {
