@@ -45,14 +45,18 @@ export class Species {
     let observation = this.observations.splice(Math.floor(Math.random()*this.observations.length), 1)[0];
     let imageUrl = observation.photos[0].url.replace('square', 'medium');
     let attribution = observation.photos[0].attribution;
-    console.log(observation.photos[0]);
     document.getElementById("image").setAttribute('src', imageUrl);
+    document.getElementById("image").style.display = 'block';
     document.getElementById("attribution").textContent = attribution + " via iNaturalist";
     console.log(observation.uri);
   }
 
   public stopSound() {
     (<HTMLVideoElement>document.getElementById("audio")).pause();
+  }
+
+  public hideImage() {
+    document.getElementById("image").style.display = 'none';
   }
 
   public getName() {

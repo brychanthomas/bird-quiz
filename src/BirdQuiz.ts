@@ -60,6 +60,7 @@ export class BirdQuiz {
 
   backToLists() {
     this.currentSpecies.stopSound();
+    this.currentSpecies.hideImage();
     this.ui.setQuizPageVisible(false);
     this.ui.setBirdListsVisible(true);
     this.correctAnswers = 0;
