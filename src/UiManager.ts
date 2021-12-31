@@ -17,11 +17,24 @@ export class UiManager {
     this.birdListsDiv = document.createElement('div');
     this.birdListsDiv.id = 'birdListsDiv';
     document.body.appendChild(this.birdListsDiv);
-
+    let table = document.createElement('table');
+    this.birdListsDiv.appendChild(table);
+    let row = document.createElement('tr');
+    table.appendChild(row);
+    let left = document.createElement('td');
+    row.appendChild(left);
+    let right = document.createElement('td');
+    row.appendChild(right);
+    var leftFlag = true;
     for (var list of birdLists) {
+      let activeCol = right;
+      if (leftFlag) {
+        activeCol = left;
+      }
+      leftFlag = !leftFlag;
       var title = document.createElement('h2')
       title.textContent = list.name;
-      this.birdListsDiv.appendChild(title);
+      activeCol.appendChild(title);
 
       for (var bird of list.birds) {
         var checkbox = document.createElement('input');
@@ -29,15 +42,18 @@ export class UiManager {
         checkbox.id = bird[0];
         checkbox.name = "birdLists";
         checkbox.value = JSON.stringify(bird);
-        this.birdListsDiv.appendChild(checkbox);
+        activeCol.appendChild(checkbox);
         var label = document.createElement('label');
         label.textContent = bird[0];
         label.htmlFor = bird[0];
-        this.birdListsDiv.appendChild(label);
-        this.birdListsDiv.appendChild(document.createElement('br'));
+        activeCol.appendChild(label);
+        activeCol.appendChild(document.createElement('br'));
       }
     }
 
+    var title = document.createElement('h2')
+    title.textContent = "Format";
+    this.birdListsDiv.appendChild(title);
     for (var itm of ['Pictures', 'Sounds']) {
       var checkbox = document.createElement('input');
       checkbox.type = 'radio';

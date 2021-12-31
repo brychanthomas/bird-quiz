@@ -70,3 +70,12 @@ body {
   text-align: center;
   height: 60%;
 }
+
+table {
+  font-size: 100%;
+  width: 100%;
+}
+
+td {
+  width: 50%;
+}
