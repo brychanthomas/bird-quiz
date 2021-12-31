@@ -44,6 +44,9 @@ export class UiManager {
       checkbox.id = itm;
       checkbox.name = "format";
       checkbox.value = itm.toLowerCase();
+      if (itm === 'Pictures') {
+        checkbox.checked = true;
+      }
       this.birdListsDiv.appendChild(checkbox);
       var label = document.createElement('label');
       label.textContent = itm;
