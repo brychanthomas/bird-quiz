@@ -3,16 +3,17 @@ export class Species {
   private name:string;
   private observations:any;
 
-  public constructor(name: string) {
+  public constructor(name: string, format: 'sounds'|'pictures') {
     this.name = name;
-    this.getObservations();
+    this.getObservations(format);
   }
 
-  private async getObservations() {
-    let url = "https://api.inaturalist.org/v1/observations?sounds=true&quality_grade=research&order=desc&order_by=created_at"
+  private async getObservations(format: 'sounds'|'pictures') {
+    let url = "https://api.inaturalist.org/v1/observations?quality_grade=research&order=desc&order_by=created_at"
     url += "&q=" + encodeURIComponent(this.name);
     url += "&page=1";
     url += "&per_page=50";
+    url += (format === 'sounds') ? '&sounds=true' : '&photos=true';
     let response = await fetch(url);
     if (response.ok) {
       let json = await response.json();
@@ -32,6 +33,20 @@ export class Species {
     let attribution = observation.sounds[0].attribution;
     document.getElementById("audio").setAttribute('src', soundUrl);
     (<HTMLVideoElement>document.getElementById("audio")).play();
+    document.getElementById("attribution").textContent = attribution + " via iNaturalist";
+    console.log(observation.uri);
+  }
+
+  public showImage() {
+    if (this.observations == undefined) { //if observations not loaded yet
+      setTimeout(this.showImage.bind(this), 100); //try again in 100 seconds
+      return;
+    }
+    let observation = this.observations.splice(Math.floor(Math.random()*this.observations.length), 1)[0];
+    let imageUrl = observation.photos[0].url.replace('square', 'medium');
+    let attribution = observation.photos[0].attribution;
+    console.log(observation.photos[0]);
+    document.getElementById("image").setAttribute('src', imageUrl);
     document.getElementById("attribution").textContent = attribution + " via iNaturalist";
     console.log(observation.uri);
   }

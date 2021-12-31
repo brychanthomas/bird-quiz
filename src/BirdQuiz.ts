@@ -8,20 +8,22 @@ export class BirdQuiz {
   private currentSpecies: Species;
   private questionsAsked: number;
   private correctAnswers: number;
+  private format: 'pictures'|'sounds';
 
   constructor() {
     this.ui = new UiManager(this.startQuiz.bind(this), this.onKeyPress.bind(this), this.backToLists.bind(this));
-    this.speciesList = [];
     this.questionsAsked = 0;
     this.correctAnswers = 0;
   }
 
   startQuiz() {
+    this.format = this.ui.getSelectedFormat();
     var birdsSelected = this.ui.getSelectedBirds();
-      if (birdsSelected.length > 0) {
+    this.speciesList = [];
+    if (birdsSelected.length > 0) {
       this.ui.setBirdListsVisible(false);
       for (var bird of this.ui.getSelectedBirds()) {
-        this.speciesList.push(new Species(bird));
+        this.speciesList.push(new Species(bird, this.format));
       }
       this.ui.setQuizPageVisible(true);
       this.askQuestion();
@@ -47,9 +49,12 @@ export class BirdQuiz {
 
   askQuestion() {
     var speciesIndex = Math.floor(Math.random()*this.speciesList.length);
-    console.log(this.speciesList);
     console.log(this.speciesList[speciesIndex]);
-    this.speciesList[speciesIndex].playSound();
+    if (this.format === 'sounds') {
+      this.speciesList[speciesIndex].playSound();
+    } else {
+      this.speciesList[speciesIndex].showImage();
+    }
     this.currentSpecies = this.speciesList[speciesIndex];
   }
 
