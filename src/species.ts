@@ -2,18 +2,22 @@ export class Species {
 
   private names:string[];
   private observations:any;
+  private apiPage:number;
 
   public constructor(names: string[], format: 'sounds'|'pictures') {
     this.names = names;
+    this.apiPage = 1;
     this.getObservations(format);
   }
 
   private async getObservations(format: 'sounds'|'pictures') {
+    this.observations = undefined;
     let url = "https://api.inaturalist.org/v1/observations?quality_grade=research&order=desc&order_by=created_at"
     url += "&q=" + encodeURIComponent(this.names[0]);
-    url += "&page=1";
-    url += "&per_page=50";
+    url += "&page=" + this.apiPage;
+    url += "&per_page=30";
     url += (format === 'sounds') ? '&sounds=true' : '&photos=true';
+    this.apiPage++;
     let response = await fetch(url);
     if (response.ok) {
       let json = await response.json();
@@ -28,6 +32,11 @@ export class Species {
       setTimeout(this.playSound.bind(this), 100); //try again in 100 seconds
       return;
     }
+    if (this.observations.length === 0) {
+      this.getObservations('sounds');
+      setTimeout(this.playSound.bind(this), 100); //try again in 100 seconds
+      return;
+    }
     let observation = this.observations.splice(Math.floor(Math.random()*this.observations.length), 1)[0];
     let soundUrl = observation.sounds[0].file_url;
     let attribution = observation.sounds[0].attribution;
@@ -39,6 +48,11 @@ export class Species {
 
   public showImage() {
     if (this.observations == undefined) { //if observations not loaded yet
+      setTimeout(this.showImage.bind(this), 100); //try again in 100 seconds
+      return;
+    }
+    if (this.observations.length === 0) { //if run out of observations
+      this.getObservations('pictures'); //load observations
       setTimeout(this.showImage.bind(this), 100); //try again in 100 seconds
       return;
     }
