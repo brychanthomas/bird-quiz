@@ -52,8 +52,6 @@ export class UiManager {
     input.type = 'text';
     input.id = "birdNameInput";
     input.onkeypress = callback;
-    input.style.width = '100%';
-    input.style.textAlign = 'center';
     this.quizDiv.appendChild(input);
     var answerText = document.createElement('span');
     answerText.style.display = 'none';
