@@ -48,6 +48,7 @@ export class Species {
     document.getElementById("image").setAttribute('src', imageUrl);
     document.getElementById("image").style.display = 'block';
     document.getElementById("attribution").textContent = attribution + " via iNaturalist";
+    (<HTMLAnchorElement>document.getElementById("imageLink")).href = imageUrl.replace('medium', 'large');
     console.log(observation.uri);
   }
 
