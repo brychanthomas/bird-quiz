@@ -77,6 +77,7 @@ export class UiManager {
     var button = document.createElement('button');
     button.onclick = callback;
     button.textContent = "Start";
+    button.id = "startButton";
     this.birdListsDiv.appendChild(button);
   }
 
