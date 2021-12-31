@@ -58,6 +58,12 @@ export class UiManager {
     answerText.style.display = 'none';
     answerText.id = "answerText";
     this.quizDiv.appendChild(answerText);
+    var progressBarContainer = document.createElement('div');
+    progressBarContainer.id = 'progressBarContainer';
+    this.quizDiv.appendChild(progressBarContainer);
+    var progressBar = document.createElement('div');
+    progressBar.id = 'progressBar';
+    progressBarContainer.appendChild(progressBar);
   }
 
   private createBackButton(callback: ()=>void) {
@@ -100,7 +106,6 @@ export class UiManager {
     colourFlasher.style.display = 'block';
     var timer = setInterval(function() {
       colourFlasher.style.opacity = String(Number(colourFlasher.style.opacity)+0.1);
-      console.log(colourFlasher);
       if (Number(colourFlasher.style.opacity) === 1) {
         clearInterval(timer);
       }
@@ -112,10 +117,15 @@ export class UiManager {
     var colourFlasher = document.getElementById("colourFlasher");
     var timer = setInterval(function() {
       colourFlasher.style.opacity = String(Number(colourFlasher.style.opacity)-0.1);
-      console.log(colourFlasher);
       if (Number(colourFlasher.style.opacity) === 0) {
         clearInterval(timer);
       }
     }, 15);
+  }
+
+  public setProgressBar(percentage) {
+    var bar = document.getElementById("progressBar");
+    bar.style.width = percentage + '%';
+    bar.textContent = Math.round(percentage) + '%';
   }
 }
