@@ -27,6 +27,7 @@ export class UiManager {
         var checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
         checkbox.id = bird;
+        checkbox.name = "birdLists";
         checkbox.value = bird;
         this.birdListsDiv.appendChild(checkbox);
         var label = document.createElement('label');
@@ -36,6 +37,21 @@ export class UiManager {
         this.birdListsDiv.appendChild(document.createElement('br'));
       }
     }
+
+    for (var itm of ['Pictures', 'Sounds']) {
+      var checkbox = document.createElement('input');
+      checkbox.type = 'radio';
+      checkbox.id = itm;
+      checkbox.name = "format";
+      checkbox.value = itm.toLowerCase();
+      this.birdListsDiv.appendChild(checkbox);
+      var label = document.createElement('label');
+      label.textContent = itm;
+      label.htmlFor = itm;
+      this.birdListsDiv.appendChild(label);
+      this.birdListsDiv.appendChild(document.createElement('br'));
+    }
+
   }
 
   private createStartButton(callback:()=>void) {
@@ -77,12 +93,17 @@ export class UiManager {
   }
 
   public getSelectedBirds(): string[] {
-    var checkedBoxes = document.querySelectorAll('input:checked');
+    var checkedBoxes = document.querySelectorAll('input[name=birdLists]:checked');
     var birds = [];
     for (var bird of checkedBoxes) {
       birds.push((<HTMLInputElement>bird).value);
     }
     return birds;
+  }
+
+  public getSelectedFormat(): 'pictures'|'sounds' {
+    var checkedRadio = document.querySelectorAll('input[name=format]:checked');
+    return (<HTMLInputElement>checkedRadio[0]).value === 'sounds' ? 'sounds' : 'pictures';
   }
 
   public setBirdListsVisible(visible: boolean) {
