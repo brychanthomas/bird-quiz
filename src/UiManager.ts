@@ -88,6 +88,9 @@ export class UiManager {
 
   public setQuizPageVisible(visible: boolean) {
     this.quizDiv.style.display = (visible ? 'block' : 'none');
+    var progressBar = document.getElementById("progressBar");
+    progressBar.style.width = '0%';
+    progressBar.textContent = '';
   }
 
   public getAndClearTextInput() {

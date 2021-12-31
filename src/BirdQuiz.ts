@@ -57,6 +57,8 @@ export class BirdQuiz {
     this.currentSpecies.stopSound();
     this.ui.setQuizPageVisible(false);
     this.ui.setBirdListsVisible(true);
+    this.correctAnswers = 0;
+    this.questionsAsked = 0;
   }
 
 }
