@@ -32,6 +32,7 @@ export class Species {
     let attribution = observation.sounds[0].attribution;
     document.getElementById("audio").setAttribute('src', soundUrl);
     (<HTMLVideoElement>document.getElementById("audio")).play();
+    document.getElementById("attribution").textContent = attribution + " via iNaturalist";
     console.log(observation.uri);
   }
 

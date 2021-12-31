@@ -47,3 +47,12 @@ body {
   height: 30px;
   text-align: center;
 }
+
+#attribution {
+  position: absolute;
+  top: 25%;
+  left: 0%;
+  width: 100%;
+  text-align: center;
+  font-size: 1em;
+}

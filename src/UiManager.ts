@@ -49,6 +49,9 @@ export class UiManager {
     this.quizDiv = document.createElement('div');
     this.quizDiv.id = 'quizDiv';
     document.body.appendChild(this.quizDiv);
+    var attributionText = document.createElement('span');
+    attributionText.id = "attribution";
+    this.quizDiv.appendChild(attributionText);
     var input = document.createElement('input');
     input.type = 'text';
     input.id = "birdNameInput";
