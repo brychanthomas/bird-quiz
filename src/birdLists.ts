@@ -1,10 +1,20 @@
 export var birdLists = [
   {
-    "name":"Garden",
+    "name":"Woodpeckers",
     "birds":[
-      "European Robin",
-      "Great Tit",
-      "Blue Tit"
+      ["European green woodpecker", "Green woodpecker"],
+      ["Great spotted woodpecker"],
+      ["Lesser spotted woodpecker"]
+    ]
+  },
+  {
+    "name":"Tits",
+    "birds":[
+      ["Blue tit"],
+      ["Great tit"],
+      ["Coal tit"],
+      ["Willow tit"],
+      ["Marsh tit"]
     ]
   }
 ];

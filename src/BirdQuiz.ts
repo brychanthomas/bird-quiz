@@ -23,7 +23,7 @@ export class BirdQuiz {
     if (birdsSelected.length > 0) {
       this.ui.setBirdListsVisible(false);
       for (var bird of this.ui.getSelectedBirds()) {
-        this.speciesList.push(new Species(bird, this.format));
+        this.speciesList.push(new Species(JSON.parse(bird), this.format));
       }
       this.ui.setQuizPageVisible(true);
       this.askQuestion();
@@ -32,7 +32,7 @@ export class BirdQuiz {
 
   onKeyPress(event) {
     if (event.keyCode === 13) {
-      if (this.ui.getAndClearTextInput().toLowerCase() === this.currentSpecies.getName().toLowerCase()) {
+      if (this.currentSpecies.nameCorrect(this.ui.getAndClearTextInput())) {
         this.ui.showAnswer(this.currentSpecies.getName(), 'palegreen');
         this.correctAnswers++;
       } else {

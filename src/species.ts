@@ -1,16 +1,16 @@
 export class Species {
 
-  private name:string;
+  private names:string[];
   private observations:any;
 
-  public constructor(name: string, format: 'sounds'|'pictures') {
-    this.name = name;
+  public constructor(names: string[], format: 'sounds'|'pictures') {
+    this.names = names;
     this.getObservations(format);
   }
 
   private async getObservations(format: 'sounds'|'pictures') {
     let url = "https://api.inaturalist.org/v1/observations?quality_grade=research&order=desc&order_by=created_at"
-    url += "&q=" + encodeURIComponent(this.name);
+    url += "&q=" + encodeURIComponent(this.names[0]);
     url += "&page=1";
     url += "&per_page=50";
     url += (format === 'sounds') ? '&sounds=true' : '&photos=true';
@@ -61,6 +61,10 @@ export class Species {
   }
 
   public getName() {
-    return this.name;
+    return this.names[0];
+  }
+
+  public nameCorrect(attempt: string) {
+    return this.names.map(n=>n.toLowerCase()).indexOf(attempt.toLowerCase()) !== -1;
   }
 }

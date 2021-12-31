@@ -26,13 +26,13 @@ export class UiManager {
       for (var bird of list.birds) {
         var checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
-        checkbox.id = bird;
+        checkbox.id = bird[0];
         checkbox.name = "birdLists";
-        checkbox.value = bird;
+        checkbox.value = JSON.stringify(bird);
         this.birdListsDiv.appendChild(checkbox);
         var label = document.createElement('label');
-        label.textContent = bird;
-        label.htmlFor = bird;
+        label.textContent = bird[0];
+        label.htmlFor = bird[0];
         this.birdListsDiv.appendChild(label);
         this.birdListsDiv.appendChild(document.createElement('br'));
       }
