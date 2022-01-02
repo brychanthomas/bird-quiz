@@ -13,7 +13,7 @@ export class BirdQuiz {
         if (birdsSelected.length > 0) {
             this.ui.setBirdListsVisible(false);
             for (var bird of this.ui.getSelectedBirds()) {
-                this.speciesList.push(new Species(JSON.parse(bird), this.format));
+                this.speciesList.push(new Species(JSON.parse(bird)));
             }
             this.ui.setQuizPageVisible(true);
             this.askQuestion();

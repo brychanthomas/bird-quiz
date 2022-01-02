@@ -4,7 +4,7 @@ export class Species {
   private observations:any;
   private apiPage:number;
 
-  public constructor(names: string[], format: 'sounds'|'pictures') {
+  public constructor(names: string[]) {
     this.names = names;
     this.apiPage = 1;
     this.observations = [];

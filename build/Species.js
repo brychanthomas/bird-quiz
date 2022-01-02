@@ -8,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 export class Species {
-    constructor(names, format) {
+    constructor(names) {
         this.names = names;
         this.apiPage = 1;
         this.observations = [];
