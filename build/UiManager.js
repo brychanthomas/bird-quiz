@@ -26,14 +26,29 @@ export class UiManager {
                 activeCol = left;
             }
             leftFlag = !leftFlag;
+            var checkbox = document.createElement('input'); //select all checkbox
+            checkbox.type = 'checkbox';
+            checkbox.id = list.name + "selectAll";
+            checkbox.name = "selectAll";
+            //activeCol.appendChild(checkbox);
+            var label = document.createElement('label');
             var title = document.createElement('h2');
-            title.textContent = list.name;
-            activeCol.appendChild(title);
+            title.appendChild(checkbox);
+            title.innerHTML += list.name;
+            label.htmlFor = list.name + "selectAll";
+            label.onclick = function (event) {
+                for (var c of document.getElementsByName(this)) {
+                    c.checked = event.srcElement.checked;
+                }
+            }.bind(list.name);
+            label.appendChild(title);
+            activeCol.appendChild(label);
+            activeCol.appendChild(document.createElement('br'));
             for (var bird of list.birds) {
                 var checkbox = document.createElement('input');
                 checkbox.type = 'checkbox';
                 checkbox.id = bird[0];
-                checkbox.name = "birdLists";
+                checkbox.name = list.name;
                 checkbox.value = JSON.stringify(bird);
                 activeCol.appendChild(checkbox);
                 var label = document.createElement('label');
@@ -46,6 +61,7 @@ export class UiManager {
         var title = document.createElement('h2');
         title.textContent = "Format";
         this.birdListsDiv.appendChild(title);
+        this.birdListsDiv.appendChild(document.createElement('br'));
         for (var itm of ['Pictures', 'Sounds']) {
             var checkbox = document.createElement('input');
             checkbox.type = 'radio';
@@ -100,10 +116,12 @@ export class UiManager {
         this.quizDiv.insertBefore(back, this.quizDiv.firstChild);
     }
     getSelectedBirds() {
-        var checkedBoxes = document.querySelectorAll('input[name=birdLists]:checked');
+        var checkedBoxes = document.querySelectorAll('input:checked');
         var birds = [];
         for (var bird of checkedBoxes) {
-            birds.push(bird.value);
+            if (bird.name !== "format" && bird.name !== "selectAll") {
+                birds.push(bird.value);
+            }
         }
         return birds;
     }

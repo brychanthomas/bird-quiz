@@ -32,15 +32,32 @@ export class UiManager {
         activeCol = left;
       }
       leftFlag = !leftFlag;
-      var title = document.createElement('h2')
-      title.textContent = list.name;
-      activeCol.appendChild(title);
+
+      var checkbox = document.createElement('input'); //select all checkbox
+      checkbox.type = 'checkbox';
+      checkbox.id = list.name + "selectAll";
+      checkbox.name = "selectAll";
+      //activeCol.appendChild(checkbox);
+
+      var label = document.createElement('label');
+      var title = document.createElement('h2');
+      title.appendChild(checkbox);
+      title.innerHTML += list.name;
+      label.htmlFor = list.name + "selectAll";
+      label.onclick = function(event: PointerEvent) {
+        for (var c of document.getElementsByName(this)) {
+          (<HTMLInputElement>c).checked = (<HTMLInputElement>event.srcElement).checked;
+        }
+      }.bind(list.name);
+      label.appendChild(title);
+      activeCol.appendChild(label);
+      activeCol.appendChild(document.createElement('br'));
 
       for (var bird of list.birds) {
         var checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
         checkbox.id = bird[0];
-        checkbox.name = "birdLists";
+        checkbox.name = list.name;
         checkbox.value = JSON.stringify(bird);
         activeCol.appendChild(checkbox);
         var label = document.createElement('label');
@@ -54,6 +71,7 @@ export class UiManager {
     var title = document.createElement('h2')
     title.textContent = "Format";
     this.birdListsDiv.appendChild(title);
+    this.birdListsDiv.appendChild(document.createElement('br'));
     for (var itm of ['Pictures', 'Sounds']) {
       var checkbox = document.createElement('input');
       checkbox.type = 'radio';
@@ -113,10 +131,12 @@ export class UiManager {
   }
 
   public getSelectedBirds(): string[] {
-    var checkedBoxes = document.querySelectorAll('input[name=birdLists]:checked');
+    var checkedBoxes = document.querySelectorAll('input:checked');
     var birds = [];
     for (var bird of checkedBoxes) {
-      birds.push((<HTMLInputElement>bird).value);
+      if ((<HTMLInputElement>bird).name !== "format" && (<HTMLInputElement>bird).name !== "selectAll") {
+        birds.push((<HTMLInputElement>bird).value);
+      }
     }
     return birds;
   }

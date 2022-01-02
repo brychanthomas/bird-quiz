@@ -101,3 +101,7 @@ td {
   background-color: #ddd;
   color: black;
 }
+
+h2 {
+  display: inline-block;
+}
