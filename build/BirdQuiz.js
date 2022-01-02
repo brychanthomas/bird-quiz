@@ -20,7 +20,7 @@ export class BirdQuiz {
         }
     }
     onKeyPress(event) {
-        if (event.keyCode === 13) {
+        if (event.key === 'Enter') {
             if (this.currentSpecies.nameCorrect(this.ui.getAndClearTextInput())) {
                 this.ui.showAnswer(this.currentSpecies.getName(), 'palegreen');
                 this.correctAnswers++;

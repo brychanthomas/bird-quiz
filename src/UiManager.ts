@@ -5,7 +5,7 @@ export class UiManager {
   private birdListsDiv: HTMLElement;
   private quizDiv: HTMLElement;
 
-  constructor(startButtonCallback:()=>void, keyPressCallback:(key)=>void, backCallback:()=>void) {
+  constructor(startButtonCallback:()=>void, keyPressCallback:(key:KeyboardEvent)=>void, backCallback:()=>void) {
     this.createBirdLists();
     this.createStartButton(startButtonCallback);
     this.createQuizPage(keyPressCallback);
@@ -164,7 +164,7 @@ export class UiManager {
     return text;
   }
 
-  public showAnswer(text, colour) {
+  public showAnswer(text: string, colour: string) {
     var answerText = document.getElementById("answerText");
     answerText.textContent = text;
     answerText.style.display = 'block';
@@ -190,7 +190,7 @@ export class UiManager {
     }, 15);
   }
 
-  public setProgressBar(percentage) {
+  public setProgressBar(percentage: number) {
     var bar = document.getElementById("progressBar");
     bar.style.width = percentage + '%';
     bar.textContent = Math.round(percentage) + '%';
