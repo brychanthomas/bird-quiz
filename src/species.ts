@@ -7,7 +7,7 @@ export class Species {
   public constructor(names: string[], format: 'sounds'|'pictures') {
     this.names = names;
     this.apiPage = 1;
-    this.getObservations(format);
+    this.observations = [];
   }
 
   private async getObservations(format: 'sounds'|'pictures') {
@@ -23,7 +23,7 @@ export class Species {
       let json = await response.json();
       this.observations = json.results;
     } else {
-      alert(response.status);
+      console.log(response);
     }
   }
 

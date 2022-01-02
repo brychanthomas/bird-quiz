@@ -11,7 +11,7 @@ export class Species {
     constructor(names, format) {
         this.names = names;
         this.apiPage = 1;
-        this.getObservations(format);
+        this.observations = [];
     }
     getObservations(format) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -28,7 +28,7 @@ export class Species {
                 this.observations = json.results;
             }
             else {
-                alert(response.status);
+                console.log(response);
             }
         });
     }
