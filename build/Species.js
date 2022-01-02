@@ -81,6 +81,8 @@ export class Species {
         return this.names[0];
     }
     nameCorrect(attempt) {
-        return this.names.map(n => n.toLowerCase()).indexOf(attempt.toLowerCase()) !== -1;
+        let tidiedNames = this.names.map(n => n.toLowerCase().replace(/-/g, ' '));
+        let tidiedAttempt = attempt.toLowerCase().replace(/-/g, ' ');
+        return tidiedNames.indexOf(tidiedAttempt) !== -1;
     }
 }
