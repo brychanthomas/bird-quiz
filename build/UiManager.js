@@ -38,7 +38,7 @@ export class UiManager {
             label.htmlFor = list.name + "selectAll";
             label.onclick = function (event) {
                 for (var c of document.getElementsByName(this)) {
-                    c.checked = event.srcElement.checked;
+                    c.checked = event.target.checked;
                 }
             }.bind(list.name);
             label.appendChild(title);
@@ -96,7 +96,7 @@ export class UiManager {
         var input = document.createElement('input');
         input.type = 'text';
         input.id = "birdNameInput";
-        input.onkeypress = callback;
+        input.onkeydown = callback;
         this.quizDiv.appendChild(input);
         var answerText = document.createElement('span');
         answerText.style.display = 'none';
