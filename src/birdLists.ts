@@ -903,8 +903,8 @@ export var birdLists = [
     "name": "Parrots",
     "birds": [
       [
-        "Ring-necked parakeet rose-ringed parakeet",
-        "Ring-necked parakeet (rose-ringed parakeet)"
+        "Rose-ringed parakeet",
+        "Ring-necked parakeet"
       ]
     ]
   },
