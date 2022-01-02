@@ -48,10 +48,12 @@ export class Species {
 
   public showImage() {
     if (this.observations == undefined) { //if observations not loaded yet
+      this.hideImage();
       setTimeout(this.showImage.bind(this), 100); //try again in 100 seconds
       return;
     }
     if (this.observations.length === 0) { //if run out of observations
+      this.hideImage();
       this.getObservations('pictures'); //load observations
       setTimeout(this.showImage.bind(this), 100); //try again in 100 seconds
       return;
