@@ -16,7 +16,7 @@ export class Species {
     getObservations(format) {
         return __awaiter(this, void 0, void 0, function* () {
             this.observations = undefined;
-            let url = "https://api.inaturalist.org/v1/observations?quality_grade=research&order=desc&order_by=created_at";
+            let url = "https://api.inaturalist.org/v1/observations?quality_grade=research&order=desc&order_by=created_at&search_on=names";
             url += "&q=" + encodeURIComponent(this.names[0]);
             url += "&page=" + this.apiPage;
             url += "&per_page=30";

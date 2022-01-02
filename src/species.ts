@@ -12,7 +12,7 @@ export class Species {
 
   private async getObservations(format: 'sounds'|'pictures') {
     this.observations = undefined;
-    let url = "https://api.inaturalist.org/v1/observations?quality_grade=research&order=desc&order_by=created_at"
+    let url = "https://api.inaturalist.org/v1/observations?quality_grade=research&order=desc&order_by=created_at&search_on=names"
     url += "&q=" + encodeURIComponent(this.names[0]);
     url += "&page=" + this.apiPage;
     url += "&per_page=30";
