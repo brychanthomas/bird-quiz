@@ -177,13 +177,25 @@ export class UiManager {
         }
         return birds;
     }
+    /**
+     * Get which format is currently selected.
+     * @return the format that is currently selected (pictures or sounds)
+     */
     getSelectedFormat() {
         var checkedRadio = document.querySelectorAll('input[name=format]:checked');
         return checkedRadio[0].value === 'sounds' ? 'sounds' : 'pictures';
     }
+    /**
+     * Make the bird lists page visible/invisible.
+     * @param  visible whether to make the bird lists visible (true) or invisible (false)
+     */
     setBirdListsVisible(visible) {
         this.birdListsDiv.style.display = (visible ? 'block' : 'none');
     }
+    /**
+     * Make the quiz page visible/invisible.
+     * @param  visible whether to make the quiz page visible (true) or invisible (false)
+     */
     setQuizPageVisible(visible) {
         this.quizDiv.style.display = (visible ? 'block' : 'none');
         var progressBar = document.getElementById("progressBar");
@@ -191,12 +203,21 @@ export class UiManager {
         progressBar.textContent = '';
         document.getElementById("image").style.display = (visible ? 'block' : 'none');
     }
+    /**
+     * Get the text currently typed into the bird name input and clear it.
+     * @return text user has typed into input
+     */
     getAndClearTextInput() {
         var input = document.getElementById('birdNameInput');
         var text = input.value;
         input.value = '';
         return text;
     }
+    /**
+     * Show answer to question and change background colour
+     * @param  text   answer to question
+     * @param  colour colour to make background
+     */
     showAnswer(text, colour) {
         var answerText = document.getElementById("answerText");
         answerText.textContent = text;
@@ -211,6 +232,9 @@ export class UiManager {
             }
         }, 15);
     }
+    /**
+     * Hide the answer text and fade the background back to normal colour.
+     */
     hideAnswer() {
         document.getElementById("answerText").style.display = 'none';
         var colourFlasher = document.getElementById("colourFlasher");
@@ -221,6 +245,10 @@ export class UiManager {
             }
         }, 15);
     }
+    /**
+     * Set percentage of progress bar on quiz page.
+     * @param  percentage value betewen 0 and 100 to set progress bar to
+     */
     setProgressBar(percentage) {
         var bar = document.getElementById("progressBar");
         bar.style.width = percentage + '%';
