@@ -46,6 +46,7 @@ export class Species {
    * @return false if observations not loaded, true if successful
    */
   public playSound() {
+    document.getElementById("image").style.display = 'none';
     if (this.observations == undefined) { //if observations not loaded yet
       return false;
     }

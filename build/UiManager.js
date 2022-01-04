@@ -165,7 +165,7 @@ export class UiManager {
     }
     /**
      * Get the list of birds that are currently selected.
-     * @return [description]
+     * @return array where each element is an array of names for a certain species
      */
     getSelectedBirds() {
         var checkedBoxes = document.querySelectorAll('input:checked');
