@@ -53,13 +53,11 @@ export class Species {
      */
     playSound() {
         if (this.observations == undefined) { //if observations not loaded yet
-            setTimeout(this.playSound.bind(this), 100); //try again in 100 ms
-            return;
+            return false;
         }
         if (this.observations.length === 0) {
             this.getObservations('sounds');
-            setTimeout(this.playSound.bind(this), 100); //try again in 100 ms
-            return;
+            return false;
         }
         let observation = this.observations.splice(Math.floor(Math.random() * this.observations.length), 1)[0];
         let soundUrl = observation.sounds[0].file_url;
@@ -68,6 +66,7 @@ export class Species {
         document.getElementById("audio").play();
         document.getElementById("attribution").textContent = attribution + " via iNaturalist";
         console.log(observation.uri);
+        return true;
     }
     /**
      * displays a picture from a randomly selected observation via the HTML img
@@ -78,24 +77,22 @@ export class Species {
      */
     showImage() {
         if (this.observations == undefined) { //if observations not loaded yet
-            this.hideImage();
-            setTimeout(this.showImage.bind(this), 100); //try again in 100 seconds
-            return;
+            return false;
         }
         if (this.observations.length === 0) { //if run out of observations
             this.hideImage();
             this.getObservations('pictures'); //load observations
-            setTimeout(this.showImage.bind(this), 100); //try again in 100 seconds
-            return;
+            return false;
         }
         let observation = this.observations.splice(Math.floor(Math.random() * this.observations.length), 1)[0];
         let imageUrl = observation.photos[0].url.replace('square', 'medium');
         let attribution = observation.photos[0].attribution;
         document.getElementById("image").setAttribute('src', imageUrl);
-        document.getElementById("image").style.opacity = '1';
+        document.getElementById("image").style.display = 'block';
         document.getElementById("attribution").textContent = attribution + " via iNaturalist";
         document.getElementById("imageLink").href = imageUrl.replace('medium', 'large');
         console.log(observation.uri);
+        return true;
     }
     /**
      * Stops playing any sound.
@@ -107,8 +104,7 @@ export class Species {
      * Hides the image element.
      */
     hideImage() {
-        document.getElementById("image").style.opacity = '0';
-        document.getElementById("image").setAttribute('src', '');
+        document.getElementById("image").style.display = 'none';
     }
     /**
      * Get the primary name of the species.
