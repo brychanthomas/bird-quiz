@@ -26,37 +26,7 @@ export class UiManager {
                 activeCol = left;
             }
             leftFlag = !leftFlag;
-            var checkbox = document.createElement('input'); //select all checkbox
-            checkbox.type = 'checkbox';
-            checkbox.id = list.name + "selectAll";
-            checkbox.name = "selectAll";
-            //activeCol.appendChild(checkbox);
-            var label = document.createElement('label');
-            var title = document.createElement('h2');
-            title.appendChild(checkbox);
-            title.innerHTML += list.name;
-            label.htmlFor = list.name + "selectAll";
-            label.onclick = function (event) {
-                for (var c of document.getElementsByName(this)) {
-                    c.checked = event.target.checked;
-                }
-            }.bind(list.name);
-            label.appendChild(title);
-            activeCol.appendChild(label);
-            activeCol.appendChild(document.createElement('br'));
-            for (var bird of list.birds) {
-                var checkbox = document.createElement('input');
-                checkbox.type = 'checkbox';
-                checkbox.id = bird[0];
-                checkbox.name = list.name;
-                checkbox.value = JSON.stringify(bird);
-                activeCol.appendChild(checkbox);
-                var label = document.createElement('label');
-                label.textContent = bird[0];
-                label.htmlFor = bird[0];
-                activeCol.appendChild(label);
-                activeCol.appendChild(document.createElement('br'));
-            }
+            this.addBirdList(list.name, list.birds, activeCol);
         }
         var title = document.createElement('h2');
         title.textContent = "Format";
@@ -79,12 +49,51 @@ export class UiManager {
             this.birdListsDiv.appendChild(document.createElement('br'));
         }
     }
+    addBirdList(listName, birds, container) {
+        var checkbox = document.createElement('input'); //select all checkbox
+        checkbox.type = 'checkbox';
+        checkbox.id = listName + "selectAll";
+        checkbox.name = "selectAll";
+        //activeCol.appendChild(checkbox);
+        var label = document.createElement('label');
+        var title = document.createElement('h2');
+        title.appendChild(checkbox);
+        title.innerHTML += listName;
+        label.htmlFor = listName + "selectAll";
+        label.onclick = function (event) {
+            for (var c of document.getElementsByName(this)) {
+                c.checked = event.target.checked;
+            }
+        }.bind(listName);
+        label.appendChild(title);
+        container.appendChild(label);
+        container.appendChild(document.createElement('br'));
+        for (var bird of birds) {
+            var checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.id = bird[0];
+            checkbox.name = listName;
+            checkbox.value = JSON.stringify(bird);
+            container.appendChild(checkbox);
+            var label = document.createElement('label');
+            label.textContent = bird[0];
+            label.htmlFor = bird[0];
+            container.appendChild(label);
+            container.appendChild(document.createElement('br'));
+        }
+    }
     createStartButton(callback) {
         var button = document.createElement('button');
         button.onclick = callback;
         button.textContent = "Start";
         button.id = "startButton";
         this.birdListsDiv.appendChild(button);
+        this.birdListsDiv.appendChild(document.createElement('br'));
+        var wikipediaLink = document.createElement('a');
+        wikipediaLink.href = 'https://en.wikipedia.org/wiki/List_of_birds_of_Wales';
+        wikipediaLink.textContent = "Bird lists obtained from Wikipedia";
+        wikipediaLink.id = "wikipediaAttribution";
+        this.birdListsDiv.appendChild(wikipediaLink);
     }
     createQuizPage(callback) {
         this.quizDiv = document.createElement('div');

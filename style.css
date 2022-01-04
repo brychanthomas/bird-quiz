@@ -89,7 +89,7 @@ td {
 
 #startButton {
   text-decoration: none;
-  display: inline-block;
+  display: block;
   padding: 8px 16px;
   background-color: #04AA6D;
   color: white;
@@ -106,4 +106,9 @@ td {
 
 h2 {
   display: inline-block;
+}
+
+#wikipediaAttribution {
+  font-style: italic;
+  font-size: 0.8em;
 }
