@@ -29,7 +29,7 @@ body {
   bottom: 0px;
   left: 0px;
   right: 0px;
-  z-index: -1;
+  z-index: -2;
   opacity: 0;
 }
 
@@ -71,6 +71,8 @@ body {
   height: 60%;
   max-width: 100%;
   object-fit: contain;
+  z-index: -1;
+  opacity: 0;
 }
 
 table {

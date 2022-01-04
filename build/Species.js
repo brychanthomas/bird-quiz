@@ -92,7 +92,7 @@ export class Species {
         let imageUrl = observation.photos[0].url.replace('square', 'medium');
         let attribution = observation.photos[0].attribution;
         document.getElementById("image").setAttribute('src', imageUrl);
-        document.getElementById("image").style.display = 'block';
+        document.getElementById("image").style.opacity = '1';
         document.getElementById("attribution").textContent = attribution + " via iNaturalist";
         document.getElementById("imageLink").href = imageUrl.replace('medium', 'large');
         console.log(observation.uri);
@@ -107,7 +107,8 @@ export class Species {
      * Hides the image element.
      */
     hideImage() {
-        document.getElementById("image").style.display = 'none';
+        document.getElementById("image").style.opacity = '0';
+        document.getElementById("image").setAttribute('src', '');
     }
     /**
      * Get the primary name of the species.

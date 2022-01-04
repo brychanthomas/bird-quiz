@@ -152,6 +152,7 @@ export class UiManager {
         var progressBar = document.getElementById("progressBar");
         progressBar.style.width = '0%';
         progressBar.textContent = '';
+        document.getElementById("image").style.display = (visible ? 'block' : 'none');
     }
     getAndClearTextInput() {
         var input = document.getElementById('birdNameInput');
