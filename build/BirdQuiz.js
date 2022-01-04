@@ -18,6 +18,9 @@ export class BirdQuiz {
             this.ui.setQuizPageVisible(true);
             this.askQuestion();
         }
+        else {
+            alert('Please select at least one species first!');
+        }
     }
     onKeyPress(event) {
         if (event.key === 'Enter') {
