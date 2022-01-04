@@ -85,12 +85,21 @@ export class UiManager {
         button.textContent = "Start";
         button.id = "startButton";
         this.birdListsDiv.appendChild(button);
+        this.birdListsDiv.appendChild(document.createElement('hr'));
         this.birdListsDiv.appendChild(document.createElement('br'));
         var wikipediaLink = document.createElement('a');
         wikipediaLink.href = 'https://en.wikipedia.org/wiki/List_of_birds_of_Wales';
         wikipediaLink.textContent = "Bird lists obtained from Wikipedia";
         wikipediaLink.id = "wikipediaAttribution";
         this.birdListsDiv.appendChild(wikipediaLink);
+        this.birdListsDiv.appendChild(document.createElement('br'));
+        let githubLink = document.createElement('a');
+        githubLink.href = 'https://github.com/brychanthomas/bird-quiz';
+        this.birdListsDiv.appendChild(githubLink);
+        let githubImage = document.createElement('img');
+        githubImage.src = 'https://opengraph.githubassets.com/1/brychanthomas/bird-quiz';
+        githubImage.id = 'githubImage';
+        githubLink.appendChild(githubImage);
     }
     createQuizPage(callback) {
         this.quizDiv = document.createElement('div');

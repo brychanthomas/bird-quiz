@@ -111,4 +111,12 @@ h2 {
 #wikipediaAttribution {
   font-style: italic;
   font-size: 0.8em;
+  display: block;
+  text-align: center;
+}
+
+#githubImage {
+  height: 25vh;
+  margin: auto;
+  display: block;
 }
