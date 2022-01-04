@@ -1,10 +1,20 @@
 import { birdLists } from './birdLists.js';
 
+/**
+ * Class that manages some of the UI functionality, such as creating elements
+ * and background colour flashes.
+ */
 export class UiManager {
 
   private birdListsDiv: HTMLElement;
   private quizDiv: HTMLElement;
 
+  /**
+   * Construct an instance of UiManager
+   * @param startButtonCallback callback called when start button on lists page pressed
+   * @param keyPressCallback callback called when key pressed in name input on quiz page
+   * @param backCallback callback called when back button pressed on quiz page
+   */
   constructor(startButtonCallback:()=>void, keyPressCallback:(key:KeyboardEvent)=>void, backCallback:()=>void) {
     this.createBirdLists();
     this.createStartButton(startButtonCallback);
@@ -13,6 +23,10 @@ export class UiManager {
     this.setQuizPageVisible(false);
   }
 
+  /**
+   * Add HTML elements for bird lists to page. By iterating through
+   * birdLists array.
+   */
   private createBirdLists() {
     this.birdListsDiv = document.getElementById('birdListsDiv');
     let table = document.createElement('table');
@@ -56,7 +70,13 @@ export class UiManager {
     }
   }
 
-  private addBirdList(listName, birds, container) {
+  /**
+   * Add one bird list to the page.
+   * @param  listName  the name of this bird list
+   * @param  birds     an array where each element is an array of names for a single species
+   * @param  container the HTML element to add the list into
+   */
+  private addBirdList(listName: string, birds: string[][], container: HTMLElement) {
     var checkbox = document.createElement('input'); //select all checkbox
     checkbox.type = 'checkbox';
     checkbox.id = listName + "selectAll";
@@ -91,15 +111,19 @@ export class UiManager {
     }
   }
 
+  /**
+   * Add the start button to the page.
+   * @param  callback function to be called when start button pressed
+   */
   private createStartButton(callback:()=>void) {
-    var button = document.createElement('button');
+    let button = document.createElement('button');
     button.onclick = callback;
     button.textContent = "Start";
     button.id = "startButton";
     this.birdListsDiv.appendChild(button);
     this.birdListsDiv.appendChild(document.createElement('hr'));
     this.birdListsDiv.appendChild(document.createElement('br'));
-    var wikipediaLink = document.createElement('a');
+    let wikipediaLink = document.createElement('a');
     wikipediaLink.href = 'https://en.wikipedia.org/wiki/List_of_birds_of_Wales';
     wikipediaLink.textContent = "Bird lists obtained from Wikipedia";
     wikipediaLink.id = "wikipediaAttribution";
@@ -114,30 +138,39 @@ export class UiManager {
     githubLink.appendChild(githubImage);
   }
 
+  /**
+   * Add elements for the quiz page to the page (name input, attribution text,
+   * answer text, progress bar).
+   * @param  callback function to be called when key pressed in text input
+   */
   private createQuizPage(callback:(key:Event)=>void) {
     this.quizDiv = document.createElement('div');
     this.quizDiv.id = 'quizDiv';
     document.body.appendChild(this.quizDiv);
-    var attributionText = document.createElement('span');
+    let attributionText = document.createElement('span');
     attributionText.id = "attribution";
     this.quizDiv.appendChild(attributionText);
-    var input = document.createElement('input');
+    let input = document.createElement('input');
     input.type = 'text';
     input.id = "birdNameInput";
     input.onkeydown = callback;
     this.quizDiv.appendChild(input);
-    var answerText = document.createElement('span');
+    let answerText = document.createElement('span');
     answerText.style.display = 'none';
     answerText.id = "answerText";
     this.quizDiv.appendChild(answerText);
-    var progressBarContainer = document.createElement('div');
+    let progressBarContainer = document.createElement('div');
     progressBarContainer.id = 'progressBarContainer';
     this.quizDiv.appendChild(progressBarContainer);
-    var progressBar = document.createElement('div');
+    let progressBar = document.createElement('div');
     progressBar.id = 'progressBar';
     progressBarContainer.appendChild(progressBar);
   }
 
+  /**
+   * Add the quiz page back button to the page.
+   * @param  callback function to be called when back button pressed
+   */
   private createBackButton(callback: ()=>void) {
     var back = document.createElement('button');
     back.onclick = callback;
@@ -145,12 +178,16 @@ export class UiManager {
     this.quizDiv.insertBefore(back, this.quizDiv.firstChild);
   }
 
-  public getSelectedBirds(): string[] {
+  /**
+   * Get the list of birds that are currently selected.
+   * @return array where each element is an array of names for a certain species
+   */
+  public getSelectedBirds(): string[][] {
     var checkedBoxes = document.querySelectorAll('input:checked');
     var birds = [];
     for (var bird of checkedBoxes) {
       if ((<HTMLInputElement>bird).name !== "format" && (<HTMLInputElement>bird).name !== "selectAll") {
-        birds.push((<HTMLInputElement>bird).value);
+        birds.push(JSON.parse((<HTMLInputElement>bird).value))
       }
     }
     return birds;
