@@ -8,9 +8,7 @@ export class UiManager {
         this.setQuizPageVisible(false);
     }
     createBirdLists() {
-        this.birdListsDiv = document.createElement('div');
-        this.birdListsDiv.id = 'birdListsDiv';
-        document.body.appendChild(this.birdListsDiv);
+        this.birdListsDiv = document.getElementById('birdListsDiv');
         let table = document.createElement('table');
         this.birdListsDiv.appendChild(table);
         let row = document.createElement('tr');
@@ -54,7 +52,6 @@ export class UiManager {
         checkbox.type = 'checkbox';
         checkbox.id = listName + "selectAll";
         checkbox.name = "selectAll";
-        //activeCol.appendChild(checkbox);
         var label = document.createElement('label');
         var title = document.createElement('h2');
         title.appendChild(checkbox);

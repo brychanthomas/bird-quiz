@@ -14,9 +14,7 @@ export class UiManager {
   }
 
   private createBirdLists() {
-    this.birdListsDiv = document.createElement('div');
-    this.birdListsDiv.id = 'birdListsDiv';
-    document.body.appendChild(this.birdListsDiv);
+    this.birdListsDiv = document.getElementById('birdListsDiv');
     let table = document.createElement('table');
     this.birdListsDiv.appendChild(table);
     let row = document.createElement('tr');
