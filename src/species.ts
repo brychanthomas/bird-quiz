@@ -42,9 +42,8 @@ export class Species {
 
   /**
    * Plays a sound from a randomly selected observation via the HTML audio
-   * element with id 'audio'. If observations loading it tries again in 100ms,
-   * and if observations have all been used it calls getObservations and tries
-   * again in 100ms. It also sets the attribution text.
+   * element with id 'audio'. It also sets the attribution text.
+   * @return false if observations not loaded, true if successful
    */
   public playSound() {
     if (this.observations == undefined) { //if observations not loaded yet
@@ -66,10 +65,9 @@ export class Species {
 
   /**
    * displays a picture from a randomly selected observation via the HTML img
-   * element with id 'image'. If observations loading it tries again in 100ms,
-   * and if observations have all been used it calls getObservations and tries
-   * again in 100ms. It also sets the attribution text and the link to the
+   * element with id 'image'. It also sets the attribution text and the link to the
    * larger version of the image.
+   * @return false if observations not loaded, true if successful
    */
   public showImage() {
     if (this.observations == undefined) { //if observations not loaded yet
