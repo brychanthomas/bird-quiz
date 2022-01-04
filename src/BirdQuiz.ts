@@ -29,6 +29,7 @@ export class BirdQuiz {
       }
       this.ui.setQuizPageVisible(true);
       this.page = 'quiz';
+      this.chooseSpecies();
       this.askQuestion();
     } else {
       alert('Please select at least one species first!');
@@ -47,23 +48,31 @@ export class BirdQuiz {
       this.ui.setProgressBar(100 * this.correctAnswers / this.questionsAsked);
       setTimeout(function() {
         this.ui.hideAnswer();
+        this.chooseSpecies();
         this.askQuestion();
       }.bind(this), 2000);
     }
+  }
+
+  private chooseSpecies() {
+    let speciesIndex = Math.floor(Math.random()*this.speciesList.length);
+    console.log(this.speciesList[speciesIndex]);
+    this.currentSpecies = this.speciesList[speciesIndex];
   }
 
   askQuestion() {
     if (this.page !== 'quiz') {
       return;
     }
-    var speciesIndex = Math.floor(Math.random()*this.speciesList.length);
-    console.log(this.speciesList[speciesIndex]);
+    let success: boolean;
     if (this.format === 'sounds') {
-      this.speciesList[speciesIndex].playSound();
+      success = this.currentSpecies.playSound();
     } else {
-      this.speciesList[speciesIndex].showImage();
+      success = this.currentSpecies.showImage();
     }
-    this.currentSpecies = this.speciesList[speciesIndex];
+    if (!success) {
+      setTimeout(this.askQuestion.bind(this), 100);
+    }
   }
 
   backToLists() {
