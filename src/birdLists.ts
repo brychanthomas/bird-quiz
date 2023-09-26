@@ -1188,7 +1188,8 @@ export var birdLists = [
         "Ring ouzel"
       ],
       [
-        "Common blackbird"
+        "Common blackbird",
+        "blackbird"
       ],
       [
         "Eyebrowed thrush"
